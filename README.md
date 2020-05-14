@@ -12,14 +12,14 @@
  
   ```{js}
   library(devtools)
-  install_github("xnie/LATEtest")
+  install_github("farbmacher/LATEtest")
   ```
 
 ## Example
  Let `y` be the outcome, `d` an endogenous regressor, `x` an exogenous control variable and `z1 z2 z3` a set of
     potentially exogenous instruments, then the adaptive Lasso regression would be
         
-    ```{js}
+    ```
     n = 3000; p = 3
     cov <- matrix(c(1, 0.3, 0.3, 1), 2, 2)
     errors <-(rmvnorm(n, rep(0,2), cov))
