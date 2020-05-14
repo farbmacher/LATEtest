@@ -1,0 +1,26 @@
+Package: LATEtest
+Title: Local Instrument Validity Tests with Causal Forests
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Helmut",
+           family = "Farbmacher",
+           role = c("aut", "cre"),
+           email = "farbmacher@econ.lmu.de")
+Description: Assumptions sufficient for the identification of local average treatment
+    effects (LATEs) generate necessary conditions which allow to refute instrument
+    validity. The degree of violations of instrument validity likely varies across 
+    subpopulations. This package uses causal forests to search and test for local 
+    violations of the LATE assumptions in a data-driven way. See the LATEtest website
+    on GitHub for more information, documentation and examples.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    grf,
+    rlearner,
+    rpart,
+    treeClust
+Suggests: 
+    rpart.plot,
+    mvtnorm
+RoxygenNote: 6.1.1
