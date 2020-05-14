@@ -17,7 +17,7 @@ install_github("farbmacher/LATEtest")
 ```
 
 ## Example
-Let `Y` be the outcome, `D` an endogenous treatment indicator, `Z` a binary instrument, `X` predetermined covariates, `gamma` models a local violation of the exclusion restriction.
+Let `Y` be the outcome, `D` an endogenous treatment indicator, `Z` a binary instrument, `X` predetermined covariates:
         
 ```R
 n = 3000; p = 3
@@ -27,6 +27,8 @@ X <- matrix(rnorm(n * p), n, p)
 colnames(X) <- paste("Xvar", 1:p, sep="")
 Z <- rbinom(n, size = 1, prob = 0.5)
 D<-as.numeric(0.2 * Z + errors[, 1] > 0)
+
+# Local violation of the exclusion restriction:
 gamma <- as.numeric(ifelse(X[, 2] < -1, 1.25, 0))
 Y <- as.vector(D + gamma * Z + errors[, 2])
 data <- as.data.frame(cbind(Y,D,Z,X))
