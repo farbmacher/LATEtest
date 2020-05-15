@@ -21,7 +21,8 @@ install_github("farbmacher/LATEtest")
 Let `Y` be the outcome, `D` an endogenous treatment indicator, `Z` a binary instrument, `X` predetermined covariates:
         
 ```R
-library("LATEtest","rpart.plot")
+library("LATEtest")
+library("rpart.plot")
 
 n = 3000; p = 3; rho=0.3
 u <- rnorm(n)

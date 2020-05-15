@@ -18,7 +18,8 @@
 #' @return list of the pruned trees, test results
 #' @examples
 #' # Generate data:
-#' library("LATEtest","rpart.plot")
+#' library("LATEtest")
+#' library("rpart.plot")
 #'
 #' n = 3000; p = 3; rho=0.3
 #' u <- rnorm(n)
