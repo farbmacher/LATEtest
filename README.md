@@ -23,7 +23,7 @@ Let `Y` be the outcome, `D` an endogenous treatment indicator, `Z` a binary inst
 ```R
 n = 3000; p = 3
 cov <- matrix(c(1, 0.3, 0.3, 1), 2, 2)
-errors <-(rmvnorm(n, rep(0,2), cov))
+errors <-(rmvnorm::rmvnorm(n, rep(0,2), cov))
 X <- matrix(rnorm(n * p), n, p)
 colnames(X) <- paste("Xvar", 1:p, sep="")
 Z <- rbinom(n, size = 1, prob = 0.5)
