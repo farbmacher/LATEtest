@@ -20,8 +20,7 @@ Imports:
     rpart,
     treeClust
 Suggests: 
-    rpart.plot,
-    mvtnorm
+    rpart.plot
 RoxygenNote: 6.1.1
 Collate: 
     'utils.R'
