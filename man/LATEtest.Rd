@@ -35,10 +35,6 @@ See the LATEtest website on \url{https://github.com/farbmacher/LATEtest} for mor
 Please report any bugs to \email{farbmacher@econ.lmu.de}
 }
 \examples{
-\dontrun{
-library("LATEtest")
-library("mvtnorm", "rpart.plot")
-
 # Generate data:
 n = 3000; p = 3; rho=0.3
 u <- rnorm(n)
@@ -60,5 +56,4 @@ test
 # Draw plot of pruned tree that led to local violation of LATE assumptions:
 maxtree <- eval(parse(text = paste("test$treelist$tree_", test$maxTtree$label, test$maxTtree$J,sep = "")))
 rpart.plot::rpart.plot(maxtree, extra = 101, box.palette = "GyRd", shadow.col = "gray", nn = TRUE, roundint = FALSE)
-}
 }

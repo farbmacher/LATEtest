@@ -15,10 +15,11 @@ Description: Assumptions sufficient for the identification of local average trea
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Suggests: 
+Imports:
     grf,
     rpart,
-    treeClust,
+    treeClust
+Suggests: 
     rpart.plot
 RoxygenNote: 6.1.1
 Collate: 

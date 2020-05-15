@@ -2,6 +2,7 @@
 #'
 #' @param row row
 #' @param rp rp
+#' @export row2leaf
 row2leaf <- function(row, rp) {
   as.numeric(rownames(rp$frame)[row])
 }
@@ -9,6 +10,7 @@ row2leaf <- function(row, rp) {
 #' Gives the number of the parent leaf
 #'
 #' @param y y
+#' @export parent
 parent <- function(y) {
   if (y[1] != 1)
     c(Recall(if (y %% 2 == 0L) y / 2 else (y - 1) / 2), y) else y
@@ -19,6 +21,7 @@ parent <- function(y) {
 #' @param sample data to use
 #' @param treeinuse tree to use
 #' @param ordered_frame ordered tree frame
+#' @export gates_nodes
 gates_nodes <- function(sample, treeinuse, ordered_frame) {
   leaves <- row2leaf(treeClust::rpart.predict.leaves(treeinuse, sample, type = "where"), treeinuse)
   allleaves <- lapply(leaves, parent)
@@ -47,6 +50,7 @@ gates_nodes <- function(sample, treeinuse, ordered_frame) {
 #' @param sample data to use
 #' @param treeinuse tree to use
 #' @param ordered_frame ordered tree frame
+#' @export gates
 gates <- function(sample, treeinuse, ordered_frame) {
   leaves <- row2leaf(treeClust::rpart.predict.leaves(treeinuse, sample, type = "where"), treeinuse)
   nuleaves <- length(unique(leaves))
@@ -85,6 +89,7 @@ gates <- function(sample, treeinuse, ordered_frame) {
 #' @param minsize causal forest insists on at least "minsize" treated and "minsize" control observations per leaf
 #' @param type indicates whether we consider D=1 or D=0
 #' @return pseudo-outcome, oob predictions of pseudo-outcome, oob estimates of causal forest
+#' @export oob
 oob <- function(est, y, huge, tree_fraction, minsize, type) {
   if (type == 1) {
     Q <- est$YinJ[, y] * est$D
@@ -120,6 +125,7 @@ oob <- function(est, y, huge, tree_fraction, minsize, type) {
 #' @param minsize pruned tree insists on at least 2*"minsize" observations in the additional trees to identify the promising subgroups
 #' @param cp sets complexity parameter which rpart uses to fit the tree before pruning; default=0
 #' @return augmented inverse probability weighting scores, indicator for promising leaves
+#' @export estimation
 estimation <- function(tra, est, y, covars, type, minsize, cp) {
   tra$scores <- tra$tauhat + tra$Z / tra$Zhat * (tra$Q - tra$Qhat - (1 - tra$Zhat) * tra$tauhat) -
                             (1 - tra$Z) / (1 - tra$Zhat) * (tra$Q - tra$Qhat + tra$Zhat * tra$tauhat)
