@@ -20,16 +20,16 @@
 #' library("mvtnorm", "rpart.plot")
 #'
 #' # Generate data:
-#' n = 3000; p = 3
-#' cov <- matrix(c(1, 0.3, 0.3, 1), 2, 2)
-#' errors <-(rmvnorm::rmvnorm(n, rep(0,2), cov))
+#' n = 3000; p = 3; rho=0.3
+#' u <- rnorm(n)
+#' v <- rho * u + sqrt(1 - rho^2) * rnorm(n)
 #' X <- matrix(rnorm(n * p), n, p)
 #' colnames(X) <- paste("Xvar", 1:p, sep="")
 #' Z <- rbinom(n, size = 1, prob = 0.5)
-#' D<-as.numeric(0.2 * Z + errors[, 1] > 0)
+#' D<-as.numeric(0.2 * Z + v > 0)
 #' # local violation of the exclusion restriction:
 #' gamma <- as.numeric(ifelse(X[, 2] < -1, 1.25, 0))
-#' Y <- as.vector(D + gamma * Z + errors[, 2])
+#' Y <- as.vector(D + gamma * Z + u)
 #' data <- as.data.frame(cbind(Y,D,Z,X))
 #'
 #' # Perform test:
