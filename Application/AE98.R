@@ -22,7 +22,7 @@ data<-read.dta13("AE98_data.dta")
 nrow(data)
 
 subsets <- 4
-synthetic <- TRUE     # adds synthetic direct effects to the outcome (empirical Monte-Carlo simulation)
+synthetic <- FALSE     # adds synthetic direct effects to the outcome (empirical Monte-Carlo simulation)
 
 Xvars <- paste0(c("age","agefst","othrace","white","black","hisp","lesshs","hs","morehs"))
 data$Y <- data$lincome

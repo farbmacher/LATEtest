@@ -9,7 +9,12 @@ rm(list=ls())
 packages <- c("LATEtest","foreach", "doParallel", "mvtnorm")
 invisible(lapply(packages, library, character.only = TRUE))
 
-setwd("/Users/helmut/Desktop/Simulations")   # set working directory path
+system <- Sys.info()['sysname']
+if(system == 'Windows') {
+  setwd("C:/Users/farbma/Documents/GitHub/LATEtest")    # my path Windows
+} else if(system == 'Darwin') {
+  setwd("/Users/helmut/Documents/GitHub/LATEtest")      # my path Mac
+}
 
 ######################################################################################
 # Function for data simulation
@@ -69,7 +74,7 @@ set.seed(seed)
 #####################
 setup <- "A"          # A: randomized experiment, B: easy confounding of Z and strong confounding of D
 n <- 3000             # number of observations
-R <- 100              # number of Monte Carlo replications
+R <- 1000              # number of Monte Carlo replications
 
 subsets <- 4
 siglevel <- 0.05
