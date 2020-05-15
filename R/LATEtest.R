@@ -18,6 +18,8 @@
 #' @return list of the pruned trees, test results
 #' @examples
 #' # Generate data:
+#' library("LATEtest","rpart.plot")
+#'
 #' n = 3000; p = 3; rho=0.3
 #' u <- rnorm(n)
 #' v <- rho * u + sqrt(1 - rho^2) * rnorm(n)
@@ -37,7 +39,7 @@
 #'
 #' # Draw plot of pruned tree that led to local violation of LATE assumptions:
 #' maxtree <- eval(parse(text = paste("test$treelist$tree_", test$maxTtree$label, test$maxTtree$J,sep = "")))
-#' rpart.plot::rpart.plot(maxtree, extra = 101, box.palette = "GyRd", shadow.col = "gray", nn = TRUE, roundint = FALSE)
+#' rpart.plot(maxtree, extra = 101, box.palette = "GyRd", shadow.col = "gray", nn = TRUE, roundint = FALSE)
 #' @export LATEtest
 
 LATEtest <- function(data, covars, huge=FALSE, tree_fraction=0.5, minsize=100, cp=0, subsets=4, alpha=0.05, seed=10101) {

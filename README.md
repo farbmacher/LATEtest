@@ -21,6 +21,8 @@ install_github("farbmacher/LATEtest")
 Let `Y` be the outcome, `D` an endogenous treatment indicator, `Z` a binary instrument, `X` predetermined covariates:
         
 ```R
+library("LATEtest","rpart.plot")
+
 n = 3000; p = 3; rho=0.3
 u <- rnorm(n)
 v <- rho*u + sqrt(1-rho^2)*rnorm(n)
@@ -41,7 +43,7 @@ test
 
 # Draw plot of pruned tree that led to local violation of LATE assumptions:
 maxtree <- eval(parse(text = paste("test$treelist$tree_", test$maxTtree$label, test$maxTtree$J,sep = "")))
-rpart.plot::rpart.plot(maxtree, extra = 101, box.palette = "GyRd", shadow.col = "gray", nn = TRUE, roundint = FALSE)
+rpart.plot(maxtree, extra = 101, box.palette = "GyRd", shadow.col = "gray", nn = TRUE, roundint = FALSE)
 ```
 
 ## Author
