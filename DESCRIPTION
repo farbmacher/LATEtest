@@ -23,3 +23,6 @@ Suggests:
     rpart.plot,
     mvtnorm
 RoxygenNote: 6.1.1
+Collate: 
+    'utils.R'
+    'LATEtest.R'

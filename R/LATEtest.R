@@ -4,6 +4,8 @@
 #' See the LATEtest website on \url{https://github.com/farbmacher/LATEtest} for more information, documentation and examples.
 #' Please report any bugs to \email{farbmacher@@econ.lmu.de}
 #'
+#' @include utils.R
+#'
 #' @param data provides dataset: outcome must be labelled Y, treatment D and instrument Z
 #' @param covars provides names of covariables in data (e.g., "Xvar1" "Xvar2" "Xvar3")
 #' @param huge if set to TRUE, model for orthogonalization learned on random subset of data (size defined in tree_fraction)
