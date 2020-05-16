@@ -11,9 +11,9 @@ invisible(lapply(packages, library, character.only = TRUE))
 
 system <- Sys.info()['sysname']
 if(system == 'Windows') {
-  setwd("C:/Users/farbma/Documents/GitHub/LATEtest")    # my path Windows
+  setwd("C:/Users/farbma/Documents/GitHub/LATEtest/Simulations")    # my path Windows
 } else if(system == 'Darwin') {
-  setwd("/Users/helmut/Documents/GitHub/LATEtest")      # my path Mac
+  setwd("/Users/helmut/Documents/GitHub/LATEtest/Simulations")      # my path Mac
 }
 
 ######################################################################################
