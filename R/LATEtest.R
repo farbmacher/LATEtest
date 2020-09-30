@@ -52,9 +52,7 @@ LATEtest <- function(data, covars, huge=FALSE, tree_fraction=0.5, minsize=100, c
   ##############
   n <- nrow(data)
   Yorig <- data$Y
-
   # slice Y in subsets
-  Yorig <- Y
   if(slice == 'equisized') {
     Y <- as.numeric(cut(Yorig, breaks = c(-Inf, quantile(Yorig, seq(1 / subsets, 1 - 1 / subsets, 1 / subsets)), Inf)))
   } else if(slice == 'equidistant') {
