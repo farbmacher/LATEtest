@@ -5,7 +5,8 @@
 \title{LATEtest}
 \usage{
 LATEtest(data, covars, huge = FALSE, tree_fraction = 0.5,
-  minsize = 100, cp = 0, subsets = 4, alpha = 0.05, seed = 10101)
+  minsize = 100, cp = 0, slice = c("equidistant", "equisized"),
+  subsets = 4, alpha = 0.05, seed = 10101)
 }
 \arguments{
 \item{data}{provides dataset: outcome must be labelled Y, treatment D and instrument Z}
@@ -20,7 +21,9 @@ LATEtest(data, covars, huge = FALSE, tree_fraction = 0.5,
 
 \item{cp}{sets complexity parameter which rpart uses to fit the tree before pruning; default=0}
 
-\item{subsets}{number of subsets used to discretize the outcome (using an equidistant grid from the minimum to the maximum value of Y)}
+\item{slice}{choose "equisized" for equisized subsets (quantile-based) of the outcome or "equidistant" for equidistant subsets (grid-based) of the outcome}
+
+\item{subsets}{number of subsets used to discretize the outcome}
 
 \item{alpha}{nominal significance level of the test}
 

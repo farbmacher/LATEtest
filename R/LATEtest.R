@@ -12,7 +12,8 @@
 #' @param tree_fraction fraction of the data used to build each tree of causal forest (and if huge==T, also used for regression forests); default=0.5
 #' @param minsize causal forest insists on at least "minsize" treated and "minsize" control observations per leaf, and pruned tree insists on at least 2*"minsize" observations in the additional trees to identify the promising subgroups
 #' @param cp sets complexity parameter which rpart uses to fit the tree before pruning; default=0
-#' @param subsets number of subsets used to discretize the outcome (using an equidistant grid from the minimum to the maximum value of Y)
+#' @param slice choose "equisized" for equisized subsets (quantile-based) of the outcome or "equidistant" for equidistant subsets (grid-based) of the outcome
+#' @param subsets number of subsets used to discretize the outcome
 #' @param alpha nominal significance level of the test
 #' @param seed set random seed number
 #' @return list of the pruned trees, test results
@@ -43,14 +44,22 @@
 #' rpart.plot(maxtree, extra = 101, box.palette = "GyRd", shadow.col = "gray", nn = TRUE, roundint = FALSE)
 #' @export LATEtest
 
-LATEtest <- function(data, covars, huge=FALSE, tree_fraction=0.5, minsize=100, cp=0, subsets=4, alpha=0.05, seed=10101) {
+LATEtest <- function(data, covars, huge=FALSE, tree_fraction=0.5, minsize=100, cp=0, slice=c("equidistant","equisized"), subsets=4, alpha=0.05, seed=10101) {
+  slice <- match.arg(slice)
   set.seed(seed)
 
   # Prepare data
   ##############
   n <- nrow(data)
   Yorig <- data$Y
-  Y <- as.numeric(cut(Yorig, breaks = seq(from = min(Yorig) - 0.001, to = max(Yorig) + 0.001, length.out = subsets + 1)))
+
+  # slice Y in subsets
+  Yorig <- Y
+  if(slice == 'equisized') {
+    Y <- as.numeric(cut(Yorig, breaks = c(-Inf, quantile(Yorig, seq(1 / subsets, 1 - 1 / subsets, 1 / subsets)), Inf)))
+  } else if(slice == 'equidistant') {
+    Y <- as.numeric(cut(Yorig, breaks = seq(from = min(Yorig) - 0.001, to = max(Yorig) + 0.001, length.out = subsets + 1)))
+  }
   luY <- length(unique(Y))
   YinJ <- matrix(NA, nrow = n, ncol = luY)
   for (y in 1:luY) {
@@ -226,7 +235,7 @@ LATEtest <- function(data, covars, huge=FALSE, tree_fraction=0.5, minsize=100, c
   #-------------------------------------------------------------------------------------------
   # Store chosen parameters:
   parameters <- c()
-  parameters$covars <- covars; parameters$subsets <- subsets; parameters$minsize <- minsize
+  parameters$covars <- covars; parameters$slice <- slice; parameters$subsets <- subsets; parameters$minsize <- minsize
   parameters$alpha <- alpha; parameters$huge <- huge
   if (huge == TRUE) {
     parameters$tree_fraction <- tree_fraction
