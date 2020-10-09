@@ -108,7 +108,7 @@ for (dgp in 0:5) {         #loop over all dgps; see fct_datasim() above
     data <- fct_datasim(setup=setup, dgp=dgp)
 
     test <- LATEtest(data=data, covars=paste0(colnames(data)[4:ncol(data)]), subsets=subsets, alpha=siglevel)
-    return(c(r, test$results$Tmax,test$results$cv,test$results$reject,test$results$nu_ineq))
+    return(c(r, test$results$Tmax,test$results$cv,test$results$reject_Bonf,test$results$nu_ineq))
   }
   end_time = Sys.time()
   print(end_time - start_time)

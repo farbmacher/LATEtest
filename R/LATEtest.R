@@ -197,6 +197,10 @@ LATEtest <- function(data, covars, huge=FALSE, tree_fraction=0.5, minsize=100, c
   p0 <- ncol(zeta)
   T0 <- max(zeta)
   cv0 <- qnorm(1 - alpha / p0)
+  p_zeta0 <- 1 - pnorm(zeta)
+  pvalue_Holm0 <- stats::p.adjust(p_zeta0,"holm")
+  pvalue_BHoch0 <- stats::p.adjust(p_zeta0,"BH")
+  pvalue_BY0 <- stats::p.adjust(p_zeta0,"BY")
 
   sel1_final <- c()
   for (x in 1:ncol(zeta)) {
@@ -208,6 +212,10 @@ LATEtest <- function(data, covars, huge=FALSE, tree_fraction=0.5, minsize=100, c
   p1 <- ncol(zeta1)
   T1 <- max(zeta1)
   cv1 <- qnorm(1 - alpha / p1)
+  p_zeta1 <- 1 - pnorm(zeta1)
+  pvalue_Holm1 <- stats::p.adjust(p_zeta1,"holm")
+  pvalue_BHoch1 <- stats::p.adjust(p_zeta1,"BH")
+  pvalue_BY1 <- stats::p.adjust(p_zeta1,"BY")
 
   sel2_final <- c()
   for(x in 1:ncol(zeta)) {
@@ -219,6 +227,10 @@ LATEtest <- function(data, covars, huge=FALSE, tree_fraction=0.5, minsize=100, c
   p2 <- ncol(zeta2)
   T2 <- max(zeta2)
   cv2 <- qnorm(1 - alpha / p2)
+  p_zeta2 <- 1 - pnorm(zeta2)
+  pvalue_Holm2 <- stats::p.adjust(p_zeta2,"holm")
+  pvalue_BHoch2 <- stats::p.adjust(p_zeta2,"BH")
+  pvalue_BY2 <- stats::p.adjust(p_zeta2,"BY")
 
   #-------------------------------------------------------------------------------------------
   # Store additional tree info:
@@ -247,8 +259,11 @@ LATEtest <- function(data, covars, huge=FALSE, tree_fraction=0.5, minsize=100, c
   results$nu_ineq <- cbind(p0, p1, p2)
   results$Tmax <- cbind(T0, T1, T2)
   results$cv <- cbind(cv0, cv1, cv2)
-  results$reject <- cbind(T0 > cv0, T1 > cv1, T2 > cv2)
-  results$pvalue <- cbind(min(p0 * (1 - pnorm(T0)), 1), min(p1 * (1 - pnorm(T1)), 1), min(p2 * (1 - pnorm(T2)), 1))
+  results$reject_Bonf <- cbind(T0 > cv0, T1 > cv1, T2 > cv2)
+  results$pvalue_Bonf <- cbind(min(p0 * (1 - pnorm(T0)), 1), min(p1 * (1 - pnorm(T1)), 1), min(p2 * (1 - pnorm(T2)), 1))
+  results$pvalue_Holm <- cbind(min(pvalue_Holm0), min(pvalue_Holm1), min(pvalue_Holm2))
+  results$pvalue_BenjHochberg <- cbind(min(pvalue_BHoch0), min(pvalue_BHoch1), min(pvalue_BHoch2))
+  results$pvalue_BenjYekutieli <- cbind(min(pvalue_BY0), min(pvalue_BY1), min(pvalue_BY2))
   return(list("treelist" = treelist, "maxTtree" = maxTtree, "descriptives" = descriptives, "parameters" = parameters,
               "leafinfo" = leafinfo, "results" = results))
 }
