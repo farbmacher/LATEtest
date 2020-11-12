@@ -48,7 +48,7 @@ rpart.plot(maxtree, extra = 101, box.palette = "GyRd", shadow.col = "gray", nn =
 ```
 
 ## Author
-This package is written by Helmut Farbmacher (farbmacher@econ.lmu.de)
+This package is written by Helmut Farbmacher (farbmacher@econ.lmu.de). I thank Christina Niessl for excellent research assistance.
 
 ## References
-* Farbmacher H., Guber R., Klaassen S. (2020): Instrument Validity Tests with Causal Forests, working paper.
+* Farbmacher H., Guber R., Klaassen S. (2020): Instrument Validity Tests with Causal Forests, *Journal of Business and Economics Statistics*, [Link](https://www.tandfonline.com/doi/abs/10.1080/07350015.2020.1847122?journalCode=ubes20).
